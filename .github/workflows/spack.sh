@@ -15,7 +15,7 @@ SRC=$(pwd)
 cd ..
 if [ -d spack ]; then
   ORIGIN=$(git remote get-url origin)
-  [[ "$ORIGIN" !~ "G-Ragghianti" ]] && rm -rf spack
+  [[ ! "$ORIGIN" =~ "G-Ragghianti" ]] && rm -rf spack
 fi
 git clone -b gragghia/spack_sycl https://github.com/G-Ragghianti/spack || true
 cd spack
