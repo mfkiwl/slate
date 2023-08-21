@@ -24,4 +24,3 @@ jobs:
         run: .github/workflows/spack.sh test ${{matrix.device}}
       - name: Spack Smoke Test
         run: .github/workflows/spack.sh smoke ${{matrix.device}}
-
