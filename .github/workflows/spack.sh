@@ -12,11 +12,9 @@ git submodule update --init
 
 SRC=$(pwd)
 cd ..
-git clone https://github.com/G-Ragghianti/spack || true
-cd spack
-git checkout gragghia/slate_sycl
-source share/spack/setup-env.sh
-export HOME=$(pwd)
+git clone -b gragghia/spack_sycl https://github.com/G-Ragghianti/spack || true
+source spack/share/spack/setup-env.sh
+export HOME=$(pwd)/spack
 
 cd $SRC
 module load gcc@10.4.0
