@@ -10,11 +10,19 @@ source /etc/profile
 
 git submodule update --init
 
+# Setting up Spack
 SRC=$(pwd)
 cd ..
+if [ -d spack ]; then
+  ORIGIN=$(git remote get-url origin)
+  [[ "$ORIGIN" !~ "G-Ragghianti" ]] && rm -rf spack
+fi
 git clone -b gragghia/spack_sycl https://github.com/G-Ragghianti/spack || true
-source spack/share/spack/setup-env.sh
-export HOME=$(pwd)/spack
+cd spack
+checkout gragghia/slate_sycl
+source share/spack/setup-env.sh
+export HOME=$(pwd)
+# End Spack setup
 
 cd $SRC
 module load gcc@10.4.0
