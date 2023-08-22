@@ -32,7 +32,7 @@ fi
 
 if [ "${bstage}" = "test" ]; then
   TEST="--test=root"
-  spack uninstall -a slate
+  spack uninstall -a slate || true
 fi
 
 spack compiler find
