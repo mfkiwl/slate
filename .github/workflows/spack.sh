@@ -13,6 +13,7 @@ if [ "${bstage}" = "build" ]; then
   rm -rf spack || true
   git clone -b gragghia/slate_sycl https://github.com/G-Ragghianti/spack
   cp .github/workflows/spack_packages.yaml spack/etc/spack/packages.yaml
+  spack config add upstreams:spack-instance-1:install_tree:/spack/
 fi
 
 source spack/share/spack/setup-env.sh

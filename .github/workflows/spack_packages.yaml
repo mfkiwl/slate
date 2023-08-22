@@ -6,39 +6,18 @@ packages:
     require: openmpi
   cuda:
     buildable: false
-    externals:
-    - spec: cuda@11.8.0
-      modules: [ cuda ]
   openmpi:
     buildable: false
-    externals:
-    - spec: openmpi@4.1.5
-      modules: [ openmpi ]
   cmake:
     buildable: false
-    externals:
-    - spec: cmake@3.26.3
-      modules: [ cmake ]
   intel-oneapi-mkl:
     buildable: false
-    externals:
-    - spec: intel-oneapi-mkl@2023.2.0
-      modules: [ intel-oneapi-mkl ]
   intel-oneapi-mpi:
     buildable: false
-    externals:
-    - spec: intel-oneapi-mpi@2021.10.0
-      modules: [ intel-oneapi-mpi ]
   gmake:
     buildable: false
-    externals:
-    - spec: gmake@4.4.1
-      modules: [ gmake ]
   openblas:
     buildable: false
-    externals:
-    - spec: openblas@0.3.23
-      modules: [ openblas ]
   hip:
     buildable: false
     externals:
