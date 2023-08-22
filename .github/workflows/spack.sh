@@ -12,7 +12,7 @@ if [ "${bstage}" = "build" ]; then
   git submodule update --init
   rm -rf spack || true
   git clone -b gragghia/slate_sycl https://github.com/G-Ragghianti/spack
-  cp spack_packages.yaml spack/etc/spack/
+  cp .github/workflows/spack_packages.yaml spack/etc/spack/
 fi
 
 source spack/share/spack/setup-env.sh

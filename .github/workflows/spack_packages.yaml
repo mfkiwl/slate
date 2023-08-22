@@ -1,0 +1,31 @@
+packages:
+  all:
+    target: ['x86_64']
+    variants: cuda_arch=70
+  mpi:
+    require: openmpi
+  cuda:
+    buildable: false
+    externals:
+    - spec: cuda@11.8.0
+      modules: [ cuda ]
+  openmpi:
+    buildable: false
+    externals:
+    - spec: openmpi@4.1.5
+      modules: [ openmpi ]
+  cmake:
+    buildable: false
+    externals:
+    - spec: cmake
+      modules: [ cmake ]
+  intel-oneapi-mkl:
+    buildable: false
+    externals:
+    - spec: intel-oneapi-mkl
+      modules: [ intel-oneapi-mkl ]
+  intel-oneapi-mpi:
+    buildable: false
+    externals:
+    - spec: intel-oneapi-mpi
+      modules: [ intel-oneapi-mpi ]
