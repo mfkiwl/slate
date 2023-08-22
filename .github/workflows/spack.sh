@@ -38,7 +38,7 @@ fi
 spack compiler find
 spack test remove slate
 spack spec slate@master $SPEC
-#spack dev-build --fresh $TEST slate@master $SPEC
+spack dev-build $TEST slate@master $SPEC
 
 if [ "${bstage}" = "smoke" ]; then
   spack test run slate
