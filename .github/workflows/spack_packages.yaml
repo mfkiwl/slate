@@ -34,3 +34,8 @@ packages:
     externals:
     - spec: gmake@4.4.1
       modules: [ gmake ]
+  openblas:
+    buildable: false
+    externals:
+    - spec: openblas@0.3.23
+      modules: [ openblas ]
