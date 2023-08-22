@@ -11,6 +11,7 @@ source /etc/profile
 git submodule update --init
 
 # Setting up Spack
+rm -rf spack || true
 git clone -b gragghia/slate_sycl https://github.com/G-Ragghianti/spack
 cp spack_packages.yaml spack/etc/spack/
 source spack/share/spack/setup-env.sh
