@@ -8,21 +8,21 @@ trap 'echo "# $BASH_COMMAND"' DEBUG
 
 source /etc/profile
 
-git submodule update --init
+if [ "${bstage}" = "build" ]; then
+  git submodule update --init
+  rm -rf spack || true
+  git clone -b gragghia/slate_sycl https://github.com/G-Ragghianti/spack
+  cp spack_packages.yaml spack/etc/spack/
+fi
 
-# Setting up Spack
-rm -rf spack || true
-git clone -b gragghia/slate_sycl https://github.com/G-Ragghianti/spack
-cp spack_packages.yaml spack/etc/spack/
 source spack/share/spack/setup-env.sh
 export HOME=$(pwd)
-# End Spack setup
 
 module load gcc@10.4.0
 if [ "${device}" = "gpu_nvidia" ]; then
   ARCH=$(nvidia-smi --query-gpu=compute_cap --format=csv,noheader | head -1 | sed -e 's/\.//')
   SPEC="+cuda cuda_arch=$ARCH %gcc"
-elif [ "${device}" = "gpu_nvidia" ]; then
+elif [ "${device}" = "gpu_amd" ]; then
   TARGET=$(rocminfo | grep Name | grep gfx | head -1 | awk '{print $2}')
   SPEC="+rocm amdgpu_target=$TARGET %gcc"
 else
@@ -32,6 +32,7 @@ fi
 
 if [ "${bstage}" = "test" ]; then
   TEST="--test=root"
+  spack uninstall -a slate
 fi
 
 spack compiler find
