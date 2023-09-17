@@ -472,7 +472,7 @@ void colNorms(
 //-----------------------------------------
 // gbsv()
 template <typename scalar_t>
-void gbsv(
+int64_t gbsv(
     BandMatrix<scalar_t>& A, Pivots& pivots,
         Matrix<scalar_t>& B,
     Options const& opts = Options());
@@ -480,7 +480,7 @@ void gbsv(
 //-----------------------------------------
 // gesv()
 template <typename scalar_t>
-void gesv(
+int64_t gesv(
     Matrix<scalar_t>& A, Pivots& pivots,
     Matrix<scalar_t>& B,
     Options const& opts = Options());
@@ -489,7 +489,7 @@ void gesv(
 // gesv_nopiv()
 // todo: deprecate, use gesv( ..., { MethodLU: NoPiv } )
 template <typename scalar_t>
-void gesv_nopiv(
+int64_t gesv_nopiv(
     Matrix<scalar_t>& A,
     Matrix<scalar_t>& B,
     Options const& opts = Options());
@@ -497,7 +497,7 @@ void gesv_nopiv(
 //-----------------------------------------
 // gesv_mixed()
 template <typename scalar_t>
-void gesv_mixed(
+int64_t gesv_mixed(
     Matrix<scalar_t>& A, Pivots& pivots,
     Matrix<scalar_t>& B,
     Matrix<scalar_t>& X,
@@ -505,7 +505,7 @@ void gesv_mixed(
     Options const& opts = Options());
 
 template <typename scalar_hi, typename scalar_lo>
-void gesv_mixed(
+int64_t gesv_mixed(
     Matrix<scalar_hi>& A, Pivots& pivots,
     Matrix<scalar_hi>& B,
     Matrix<scalar_hi>& X,
@@ -514,32 +514,32 @@ void gesv_mixed(
 
 template <typename scalar_t>
 [[deprecated( "Use gesv_mixed instead. Will be removed 2024-02." )]]
-void gesvMixed(
+int64_t gesvMixed(
     Matrix<scalar_t>& A, Pivots& pivots,
     Matrix<scalar_t>& B,
     Matrix<scalar_t>& X,
     int& iter,
     Options const& opts = Options())
 {
-    gesv_mixed( A, pivots, B, X, iter, opts );
+    return gesv_mixed( A, pivots, B, X, iter, opts );
 }
 
 template <typename scalar_hi, typename scalar_lo>
 [[deprecated( "Use gesv_mixed instead. Will be removed 2024-02." )]]
-void gesvMixed(
+int64_t gesvMixed(
     Matrix<scalar_hi>& A, Pivots& pivots,
     Matrix<scalar_hi>& B,
     Matrix<scalar_hi>& X,
     int& iter,
     Options const& opts = Options())
 {
-    gesv_mixed( A, pivots, B, X, iter, opts );
+    return gesv_mixed( A, pivots, B, X, iter, opts );
 }
 
 //-----------------------------------------
 // gesv_mixed_gmres()
 template <typename scalar_t>
-void gesv_mixed_gmres(
+int64_t gesv_mixed_gmres(
     Matrix<scalar_t>& A, Pivots& pivots,
     Matrix<scalar_t>& B,
     Matrix<scalar_t>& X,
@@ -547,7 +547,7 @@ void gesv_mixed_gmres(
     Options const& opts = Options());
 
 template <typename scalar_hi, typename scalar_lo>
-void gesv_mixed_gmres(
+int64_t gesv_mixed_gmres(
     Matrix<scalar_hi>& A, Pivots& pivots,
     Matrix<scalar_hi>& B,
     Matrix<scalar_hi>& X,
@@ -557,14 +557,14 @@ void gesv_mixed_gmres(
 //-----------------------------------------
 // gbtrf()
 template <typename scalar_t>
-void gbtrf(
+int64_t gbtrf(
     BandMatrix<scalar_t>& A, Pivots& pivots,
     Options const& opts = Options());
 
 //-----------------------------------------
 // getrf()
 template <typename scalar_t>
-void getrf(
+int64_t getrf(
     Matrix<scalar_t>& A, Pivots& pivots,
     Options const& opts = Options());
 
@@ -790,7 +790,7 @@ void potri(
 //-----------------------------------------
 // hesv()
 template <typename scalar_t>
-void hesv(
+int64_t hesv(
     HermitianMatrix<scalar_t>& A, Pivots& pivots,
          BandMatrix<scalar_t>& T, Pivots& pivots2,
              Matrix<scalar_t>& H,
@@ -802,7 +802,7 @@ void hesv(
 // forward real-symmetric matrices to hesv;
 // disabled for complex
 template <typename scalar_t>
-void sysv(
+int64_t sysv(
     SymmetricMatrix<scalar_t>& A, Pivots& pivots,
          BandMatrix<scalar_t>& T, Pivots& pivots2,
              Matrix<scalar_t>& H,
@@ -810,14 +810,14 @@ void sysv(
     Options const& opts = Options(),
     enable_if_t< ! is_complex<scalar_t>::value >* = nullptr)
 {
-    HermitianMatrix<scalar_t> AH(A);
-    hesv(AH, pivots, T, pivots2, H, B, opts);
+    HermitianMatrix<scalar_t> AH( A );
+    return hesv( AH, pivots, T, pivots2, H, B, opts );
 }
 
 //-----------------------------------------
 // hetrf()
 template <typename scalar_t>
-void hetrf(
+int64_t hetrf(
     HermitianMatrix<scalar_t>& A, Pivots& pivots,
          BandMatrix<scalar_t>& T, Pivots& pivots2,
              Matrix<scalar_t>& H,
@@ -828,15 +828,15 @@ void hetrf(
 // forward real-symmetric matrices to hetrf;
 // disabled for complex
 template <typename scalar_t>
-void sytrf(
+int64_t sytrf(
     SymmetricMatrix<scalar_t>& A, Pivots& pivots,
          BandMatrix<scalar_t>& T, Pivots& pivots2,
              Matrix<scalar_t>& H,
     Options const& opts = Options(),
     enable_if_t< ! is_complex<scalar_t>::value >* = nullptr)
 {
-    HermitianMatrix<scalar_t> AH(A);
-    hetrf(AH, pivots, T, pivots2, H, opts);
+    HermitianMatrix<scalar_t> AH( A );
+    return hetrf( AH, pivots, T, pivots2, H, opts );
 }
 
 //-----------------------------------------
