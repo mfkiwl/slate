@@ -571,7 +571,7 @@ int64_t getrf(
 //-----------------------------------------
 // getrf_nopiv()
 template <typename scalar_t>
-void getrf_nopiv(
+int64_t getrf_nopiv(
     Matrix<scalar_t>& A,
     Options const& opts = Options());
 
