@@ -50,9 +50,9 @@ int64_t hetrf(
         = get_option<double>( opts, Option::PivotThreshold, 1.0 );
     int64_t lookahead = get_option<int64_t>( opts, Option::Lookahead, 1 );
     int64_t ib = get_option<int64_t>( opts, Option::InnerBlocking, 16 );
-    int64_t max_panel_threads = std::max( omp_get_max_threads()/2, 1 );
-    max_panel_threads = get_option<int64_t>( opts, Option::MaxPanelThreads,
-                                             max_panel_threads );
+    int64_t max_panel_threads = 1; //std::max( omp_get_max_threads()/2, 1 );
+    //max_panel_threads = get_option<int64_t>( opts, Option::MaxPanelThreads,
+    //                                         max_panel_threads );
 
     int64_t info = 0;
     int64_t A_mt = A.mt();
